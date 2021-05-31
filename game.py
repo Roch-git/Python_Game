@@ -46,27 +46,19 @@ while not game_over:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 snake.direction = (-10,0)
-                snake.update_snake()
-                continue
             if event.key == pygame.K_RIGHT:
                 snake.direction = (10, 0)
-                snake.update_snake()
-                continue
             if event.key == pygame.K_UP:
                 snake.direction = (0, -10)
-                snake.update_snake()
-                continue
             if event.key == pygame.K_DOWN:
                 snake.direction = (0, 10)
-                snake.update_snake()
-                continue
-        print(snake.snake)
+            
         snake.update_snake()
         dis.fill(black)
         snake.draw_snake()
         pygame.display.update()
 
-        clock.tick(60)
+        clock.tick(5)
 pygame.quit()
 quit()
 
