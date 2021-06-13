@@ -1,2 +1,4 @@
 # recommended python verion is 3.9.0
 pygame==2.0.1
+pygame_menu
+os
