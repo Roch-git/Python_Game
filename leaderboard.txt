@@ -14,3 +14,5 @@ player1 500
 player1 60
 pl 70
 win 70
+rking 220
+winner 400

@@ -110,7 +110,7 @@ class Snake():
                     file.write(f"{self.score.gracz} {self.score.score}\n")
                 mainMenu()
             self.life -= 1
-            pygame.time.wait(1050)
+            pygame.time.wait(600)
             self.snake = [SnakeLocation(snake_x, snake_y), SnakeLocation(snake_x + SNAKE_SIZE, snake_y),
                           SnakeLocation(snake_x + SNAKE_SIZE, snake_y)]
             self.direction = (SNAKE_SIZE, 0)
@@ -126,7 +126,7 @@ class Snake():
                         file.write(f"{self.score.name} {self.score.score}")
                     mainMenu()
                 self.life -= 1
-                pygame.time.wait(1050)
+                pygame.time.wait(600)
                 self.snake = [SnakeLocation(snake_x, snake_y), SnakeLocation(snake_x + SNAKE_SIZE, snake_y),
                               SnakeLocation(snake_x + SNAKE_SIZE, snake_y)]
                 self.direction = (SNAKE_SIZE, 0)
@@ -190,9 +190,6 @@ class Game():
         self.apple = Apple(self.snake)
         self.apple2 = Apple(self.snake)
         self.apple3 = Apple(self.snake)
-        self.apple4 = Apple(self.snake)
-        self.apple5 = Apple(self.snake)
-        self.apple6 = Apple(self.snake)
         self.time_wait, self.clock_tick = 40, 30
         self.level = 1
 
@@ -255,15 +252,9 @@ class Game():
             self.apple.draw()
             self.apple2.draw()
             self.apple3.draw()
-            self.apple4.draw()
-            self.apple5.draw()
-            self.apple6.draw()
             self.snake.find_colision(self.apple, self.snake.score)
             self.snake.find_colision(self.apple2, self.snake.score)
             self.snake.find_colision(self.apple3, self.snake.score)
-            self.snake.find_colision(self.apple4, self.snake.score)
-            self.snake.find_colision(self.apple5, self.snake.score)
-            self.snake.find_colision(self.apple6, self.snake.score)
             pygame.display.update()
             pygame.time.wait(self.time_wait)
             self.clock.tick(self.clock_tick)
