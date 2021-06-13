@@ -1,0 +1,13 @@
+player1 20
+player1 0
+player1 0
+player1 0
+pla 0
+player 0
+rc 0
+player1 30
+rck 0
+test 0
+pla 0
+p 20
+player1 500
