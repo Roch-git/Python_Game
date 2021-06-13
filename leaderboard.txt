@@ -12,3 +12,5 @@ pla 0
 p 20
 player1 500
 player1 60
+pl 70
+win 70

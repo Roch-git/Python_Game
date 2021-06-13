@@ -62,13 +62,6 @@ class Snake():
     def __iter__(self):
         for x in self.snake:
             yield x
-    # def playSound(self):
-    #     sound_list = ['alez_on_zre_koperek.mp3', 'czegos_takiego_nigdy_nie_jadłem.mp3', 'czuc_aromat_drewna.mp3',
-    #                   'jest_po_prostu_idealne.mp3', 'mamy_pozostawac_na_czczo.mp3', 'o_Jezu_ale_to_dobre.mp3']
-    #     name = sound_list[random.randint(0, 5)]
-    #     fullname = os.path.join("dzwieki_gra", name)
-    #     sound = pygame.mixer.Sound(fullname)
-    #     sound.play()
 
     def update_snake(self):
         # self.snake = self.snake[1:] + [SnakeLocation(self.snake[-1].snake_x+self.direction[0], self.snake[-1].snake_y+self.direction[1])]
@@ -112,12 +105,12 @@ class Snake():
         if self.snake[-1].snake_x >= board[0] or self.snake[-1].snake_x < 0 or self.snake[-1].snake_y >= board[1] or \
                 self.snake[-1].snake_y < 0:
             if self.life == 1:
-                pygame.time.wait(2350)  # _> go to menu after some time
+                pygame.time.wait(1050)  # _> go to menu after some time
                 with open('leaderboard.txt', 'a') as file:
                     file.write(f"{self.score.gracz} {self.score.score}\n")
                 mainMenu()
             self.life -= 1
-            pygame.time.wait(2350)
+            pygame.time.wait(1050)
             self.snake = [SnakeLocation(snake_x, snake_y), SnakeLocation(snake_x + SNAKE_SIZE, snake_y),
                           SnakeLocation(snake_x + SNAKE_SIZE, snake_y)]
             self.direction = (SNAKE_SIZE, 0)
@@ -128,12 +121,12 @@ class Snake():
         for snake_single_location in self.snake[:-1]:
             if snake_single_location == self.snake:
                 if self.life == 1:
-                    pygame.time.wait(2350)  # _> go to menu after some time
+                    pygame.time.wait(1050)  # _> go to menu after some time
                     with open('leaderboard.txt', 'a') as file:
                         file.write(f"{self.score.name} {self.score.score}")
                     mainMenu()
                 self.life -= 1
-                pygame.time.wait(2350)
+                pygame.time.wait(1050)
                 self.snake = [SnakeLocation(snake_x, snake_y), SnakeLocation(snake_x + SNAKE_SIZE, snake_y),
                               SnakeLocation(snake_x + SNAKE_SIZE, snake_y)]
                 self.direction = (SNAKE_SIZE, 0)
@@ -231,7 +224,6 @@ class Game():
 
     def run_game(self):
         while not game_over:
-            print(self.score.gracz)
             index = 0
             for event in pygame.event.get():
                 # obsługa zdarzeń
@@ -258,7 +250,7 @@ class Game():
             self.snake.check_colision_with_board()
             self.draw_background()
             self.snake.draw_life()
-            self.score.draw_score()
+            self.snake.score.draw_score()
             self.snake.draw_snake()
             self.apple.draw()
             self.apple2.draw()
@@ -297,7 +289,6 @@ def mainMenu():
     action = partial(game.set_score, score, game)
     menu = pygame_menu.Menu("Main Menu", board[0], board[1], theme=mytheme)
     menu.add.text_input('Nick:', 'player1', maxchar=9, onchange=action)
-
     menu.add.button('Play', game.run_game)
     menu.add.selector('Difficulty :', [('Easy', 1), ('Hard', 2), ('Illusion', 3)], onchange=game.setdifficulty)
     menu.add.button('How to play', how_to_play)
@@ -307,12 +298,6 @@ def mainMenu():
     menu.mainloop(dis)
 
 
-
-
-
-    # plik = open('Leaderboard.txt', 'r+')
-    # plik.write(str(name))
-    # list_of_names = [line.replace('\n', '') for line in plik.readlines()]
 
 class Scoreboard():
     def __init__(self):
@@ -324,13 +309,12 @@ class Scoreboard():
                 self.data.append(linie[:-1].split(' '))
 
     def sort_data(self):
-        self.data = sorted(self.data, key=lambda x: x[1], reverse=True)
+        self.data = sorted(self.data, key=lambda x: int(x[1]), reverse=True)
 
 def scoreboard():
     score = Scoreboard()
     score.read_data()
     score.sort_data()
-    print(score.data)
     menu = pygame_menu.Menu('Scoreboard', board[0], board[1], theme=mytheme)
     menu.add.label("TOP 10 SCORE", font_size=30)
     for tupla in score.data[:10]:
@@ -356,18 +340,5 @@ def autors():
     menu.add.button('Back', mainMenu)
     menu.mainloop(dis)
 
-
 mainMenu()
 
-# kwadrat ktory chodzi
-# prawo lewo gora dol, za pomoca np strzalek
-# dodajemy element np tez kwadrat
-# dojdziemy do niego => napisac warunek co wtedy
-#   znika z dzwiekiem
-#   plus waz staje sie wiekszy
-#   dodatkowo pojawia sie w losowym miejscu nowy kwadrat do zjedzenia
-# ramka do skucia z dzwiekiem
-# menu
-# licznik zyc
-# poziom trudnosci
-# smok ziejacy ogniem :D
